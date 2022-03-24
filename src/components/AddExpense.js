@@ -9,7 +9,15 @@ import Button from 'react-bootstrap/Button';
 class AddExpense extends Component {
     constructor(props) {
        super(props);
-    }
+       this.state = {
+          amount: 0
+
+       }
+   
+      }
+
+      localStorageCheck = (localStorage.getItem("quickConversionAmount")) ? JSON.parse(localStorage.getItem("quickConversionAmount")) : 0;
+       
     render() {
        return(
          <div id="addExpense">
@@ -19,7 +27,7 @@ class AddExpense extends Component {
                <div className="mx-auto mt-2 mb-2">
                      <h2 className="currency text-center jumbo">$34.50</h2>
                      </div>
-               <input type="number" id="expenseAmount" name="expenseAmount" value="0" className="format-input expense-margins"></input>
+               <input type="number" id="expenseAmount" name="expenseAmount" defaultValue={+this.localStorageCheck} ref={this.state.amount} className="format-input expense-margins"></input>
                <h4 className="claret-text open-sans-condensed text-center fw-800"><strong>EXPENSE AMOUNT</strong></h4>
                <p className="blue text-center">Enter the amount in the host country's currency, and it will be converted to your home currency.</p>
                <Row>

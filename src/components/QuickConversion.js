@@ -14,7 +14,6 @@ class QuickConversion extends Component {
 
    constructor(props) {
       super(props);
-      this.onChangeAmount = this.onChangeAmount.bind(this);
       this.state = {
         conversionRate: JSON.parse(localStorage.getItem("conversionRate")),
         homeSymbol: JSON.parse(localStorage.getItem("homeSymbol")),
@@ -22,10 +21,16 @@ class QuickConversion extends Component {
         bankFeeMethod: userDataImport.bankFee,
 
       }
+
+      this.onChangeAmount = this.onChangeAmount.bind(this);
    }
 
      onChangeAmount(e) {
       this.setState({ amount: e.target.value });
+    }
+
+    storePassedAmount(amount) {
+       localStorage.setItem("quickConversionAmount", JSON.stringify(amount));
     }
 
     computedTotal() {
@@ -66,7 +71,7 @@ class QuickConversion extends Component {
               <Row>
                 <Col xs={12}>
                  <div style={{width: "180px"}} className="mx-auto">   
-                 <Link to='/add-expenses'><Button className="conversion-page-buttons text-center" size="lg">ADD EXPENSE</Button></Link>
+                 <Link to='/add-expenses'><Button className="conversion-page-buttons text-center" onClick={this.storePassedAmount(this.state.amount)} size="lg">ADD EXPENSE</Button></Link>
                   </div>
                 </Col>  
               </Row>

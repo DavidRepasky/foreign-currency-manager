@@ -16,17 +16,18 @@ class UserSettings extends Component {
   constructor(props) {
       super(props);
 
+      this.state = {
+        foreign: "EUR",
+        home: "USD",
+        bankFee: "fixed",
+        budget: 2000
+    }
+
       this.onChangeForeign = this.onChangeForeign.bind(this);
       this.onChangeHome = this.onChangeHome.bind(this);
       this.onChangeFee = this.onChangeFee.bind(this);
       this.onChangeBudget = this.onChangeBudget.bind(this);
 
-      this.state = {
-          foreign: "EUR",
-          home: "USD",
-          bankFee: "fixed",
-          budget: 2000
-      }
 
   }
 
