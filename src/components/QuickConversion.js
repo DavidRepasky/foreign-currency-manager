@@ -6,11 +6,14 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import QuickConversionFeeHandler from './QuickConversionFeeHandler';
 import QuickConversionCalculate from './QuickConversionCalculate';
-import { defaultSettings } from '../data/HelperFunctions';
+import CustomNav from './NavigationHeader';
+import {priorDay, curday, checkDay} from '../data/HelperFunctions';
+
 
 let userDataImport = JSON.parse(localStorage.getItem("user")); 
 
 class QuickConversion extends Component { 
+  
 
    constructor(props) {
       super(props);
@@ -23,6 +26,9 @@ class QuickConversion extends Component {
       }
 
       this.onChangeAmount = this.onChangeAmount.bind(this);
+     
+      checkDay();
+      
    }
 
      onChangeAmount(e) {
@@ -38,6 +44,8 @@ class QuickConversion extends Component {
     return ((this.state.conversionRate * this.state.amount) + (this.state.calculatedFees)).toFixed(2);
 
     }
+
+  
 
    render() {
       return(

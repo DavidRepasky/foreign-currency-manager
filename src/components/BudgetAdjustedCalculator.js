@@ -20,13 +20,18 @@ function BudgetAdjustedCalculator(props) {
     } 
     else if (adjustedFeeType === "no-fees") {
 
-        return `${props.amount}`;
+        return <AdjustedNoFees noFees={props.amount} />;
     }
 
     else {
 
         return <div />
     }
+  }
+
+  function AdjustedNoFees(props) {
+
+    return (props.noFees - 0).toFixed(2);
   }
 
   function AdjustedFixedFees(props) {

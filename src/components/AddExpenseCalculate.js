@@ -1,4 +1,6 @@
-function QuickConversionCalculate(props) {
+
+
+function AddExpenseCalculate(props) {
     
     let feeData = JSON.parse(localStorage.getItem("user"));
     let feeType = feeData.bankFee;
@@ -21,6 +23,9 @@ function QuickConversionCalculate(props) {
             return "0.00";
         }
 
+        let calculatedFixed = ((props.rate * props.amount) + (+fixedAmount)).toFixed(2);
+        localStorage.setItem("addExpense", JSON.stringify(calculatedFixed));
+
         return ((props.rate * props.amount) + (+fixedAmount)).toFixed(2);
     }
     else if (feeType === "percentage") {
@@ -29,6 +34,9 @@ function QuickConversionCalculate(props) {
 
             return "0.00";
         }
+
+        let calculatedPercentage = ((props.rate * props.amount) + ((props.rate * props.amount) * (percentageAmount))).toFixed(2);
+        localStorage.setItem("addExpense", JSON.stringify(calculatedPercentage));
 
         return ((props.rate * props.amount) + ((props.rate * props.amount) * (percentageAmount))).toFixed(2);
     }
@@ -40,6 +48,10 @@ function QuickConversionCalculate(props) {
             return "0.00";
         }
 
+        let calculatedBoth = ((props.rate * props.amount) + ((props.rate * props.amount) * (bothPercentAmount)) + (+bothFixedAmount)).toFixed(2); 
+
+        localStorage.setItem("addExpense", JSON.stringify(calculatedBoth));
+
         return ((props.rate * props.amount) + ((props.rate * props.amount) * (bothPercentAmount)) + (+bothFixedAmount)).toFixed(2);
     } 
     else if (feeType === "no-fees") {
@@ -49,9 +61,12 @@ function QuickConversionCalculate(props) {
             return "0.00";
         }
 
+        let calculatedNone = (props.rate * props.amount).toFixed(2);
+        localStorage.setItem("addExpense", JSON.stringify(calculatedNone));
+
         return (props.rate * props.amount).toFixed(2);
     }
     
   }
 
-export default QuickConversionCalculate;
+export default AddExpenseCalculate;

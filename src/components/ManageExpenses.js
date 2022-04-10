@@ -10,13 +10,25 @@ import { useState } from 'react';
 import render from 'react';
 import EditDeleteButtons from './EditDeleteButtons';
 import EditExpenseModal from './EditExpenseModal';
+import {ReadData, readData} from '../data/CRUD';
 
 
 class ManageExpenses extends Component {
     constructor(props) {
        super(props);
+       this.state = {
+          date: "03-31-2022"
+       }
+       this.onChangeHandler = this.onChangeHandler.bind(this);
     }
+    
+    onChangeHandler(e) {
+      this.setState({date: e.target.value});
+
+    }
+
     render() {
+       console.log(this.state.date);
        return(
          <div id="manageExpenses">
             <Container>
@@ -41,23 +53,19 @@ class ManageExpenses extends Component {
                 <Row>
                   <Col xs={12}>
                   <h4 className="claret-text open-sans-condensed text-center fw-800 mt-2 mb-2"><strong>FILTER BY DATE</strong></h4>     
-                  <select name="filterByDate" id="filterByDate" className="format-input expense-margins mb-3">
-                    <option value="4-11-2022">4-11-2022</option>
-                    <option value="4-12-2022">4-12-2022</option>
-                    <option value="4-13-2022">4-13-2022</option>
-                    <option value="4-14-2022">4-14-2022</option>
-                    <option value="4-15-2022">4-15-2022</option>
-                    <option value="4-16-2022">4-16-2022</option>
-                    <option value="4-17-2022">4-17-2022</option>
-                    <option value="4-18-2022">4-18-2022</option>
-                    <option value="4-19-2022">4-19-2022</option>
-                    <option value="4-20-2022">4-20-2022</option>
+                  <select name="filterByDate" id="filterByDate" ref={this.state.date} onChange={this.onChangeHandler} className="format-input expense-margins mb-3">
+                    <option value="03-31-2022">3-31-2022</option>
+                    <option value="04-01-2022">4-1-2022</option>
                    </select>
                   </Col>
                </Row>
                </div>
               </Container>
-              <Container>
+             
+              <ReadData date={this.state.date} />
+
+  
+              {/* <Container>
                   <Row>
                       <Col xs={12}>
                         <hr></hr>
@@ -115,7 +123,7 @@ class ManageExpenses extends Component {
                          </Col>
                         </Row> 
                       <EditExpenseModal />
-                   </Container>
+                   </Container> */}
                    <div style={{height: "250px"}}></div>   
                  </div>           
        ); 

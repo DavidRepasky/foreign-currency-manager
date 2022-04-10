@@ -1,4 +1,5 @@
 import { currencyIcon } from "./CurrencySymbol";
+import { convertCurrencies } from "./Api";
 
 export function curday(sp){
 
@@ -12,6 +13,25 @@ export function curday(sp){
     return (mm+sp+dd+sp+yyyy);
   
   };
+
+  export function checkDay() {    
+
+    let priorDay = JSON.parse(localStorage.getItem("previousDay"));
+
+    console.log(priorDay);
+  
+    let currentDay = curday('/');
+  
+    console.log(currentDay);
+    console.log('We checked the current day.')
+  
+    if (priorDay !== currentDay) {
+  
+      convertCurrencies();
+  
+  
+   }
+  }  
 
   export function foreignSymbol(currencyIcon) {
 
@@ -37,14 +57,4 @@ export function curday(sp){
 
     }
 
-    export function defaultSettings() {
-
-      if (localStorage.getItem('homeSymbol') === "undefined" || localStorage.getItem('homeSymbol') === "null" ) {
-        
-        console.log("Hi from default settings!");
-        
-        localStorage.setItem('homeSymbol', "$");
-
-      }
-    }
- 
+    

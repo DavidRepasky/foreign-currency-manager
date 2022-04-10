@@ -4,10 +4,12 @@ import SiteFooter from './SiteFooter.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { checkDay } from '../data/HelperFunctions';
 
 class Dashboard extends Component {
    constructor(props) {
       super(props);
+     checkDay(); 
    }
    render() {
       return(

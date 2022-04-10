@@ -8,6 +8,8 @@ import { convertCurrencies } from '../data/Api';
 import { currencyIcon } from '../data/CurrencySymbol';
 import { foreignSymbol } from '../data/HelperFunctions';
 import { homeSymbol } from '../data/HelperFunctions';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 class UserSettings extends Component {
   
@@ -52,6 +54,11 @@ class UserSettings extends Component {
       convertCurrencies();
       homeSymbol(currencyIcon);
       foreignSymbol(currencyIcon);
+      localStorage.setItem('isAppSetup', "true");
+      toast.success("Settings updated!", {autoClose: 2000});
+      setTimeout(function() {window.location.assign("http://localhost:3000")}, 3000);
+      
+      
 
    }
 
@@ -97,6 +104,10 @@ class UserSettings extends Component {
                  <h1 className="page-header blue text-center">SETTINGS</h1>
                  <div className="expense-margins mb-4">
                  <form onSubmit={this.onSubmit}>
+                 <div className="expense-margins mb-4">
+                  <h4 className="claret-text open-sans-condensed text-center fw-800"><strong>ENTER YOUR<br></br>TOTAL TRIP BUDGET</strong></h4>
+                  <input type="number" id="totalBudget" name="totalBudget" value={this.state.budget} onChange={this.onChangeBudget} className="format-input expense-margins"></input>
+                 </div>  
                  <div className="expense-margins mb-4">       
                  <h4 className="claret-text open-sans-condensed text-center fw-800"><strong>SELECT FOREIGN CURRENCY</strong></h4>
                  <select name="foreignCurrencyCode" id="foreignCurrencyCode" value={this.state.foreign} onChange={this.onChangeForeign} className="format-input expense-margins mb-3">
@@ -438,12 +449,8 @@ class UserSettings extends Component {
                    </select>
                    <BankFeeHandler value={this.state.bankFee}/>
                 </div>
-                <div className="expense-margins mb-4">
-                  <h4 className="claret-text open-sans-condensed text-center fw-800"><strong>ENTER YOUR<br></br>TOTAL TRIP BUDGET</strong></h4>
-                  <input type="number" id="totalBudget" name="totalBudget" value={this.state.budget} onChange={this.onChangeBudget} className="format-input expense-margins"></input>
-                 </div>
                  <div className="text-center expense-margins mx-auto">
-                    <button style={{paddingTop: "15px", paddingBottom: "15px", paddingLeft: "15px", paddingRight: "15px"}} className="nav-menu-buttons" type="submit">SAVE SETTINGS</button>
+                 <button style={{paddingTop: "15px", paddingBottom: "15px", paddingLeft: "15px", paddingRight: "15px"}} className="nav-menu-buttons" type="submit">SAVE SETTINGS</button>
                     </div>
                    </form>
                   </div>

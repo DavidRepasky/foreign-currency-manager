@@ -49,7 +49,7 @@ function BudgetingToolCalculate(props) {
             return "0.00";
         }
 
-        return (props.amount / props.rate);
+        return (props.amount / props.rate).toFixed(2);
     }
     
   }

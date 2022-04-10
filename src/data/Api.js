@@ -1,8 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { curday } from './HelperFunctions';
+import { AlertSuccess } from './Alerts';
+import { toast } from 'react-toastify';
 
-export const convertCurrencies = () => {
+
+export const convertCurrencies = () => { 
    
     let currencyData = JSON.parse(localStorage.getItem("user"));
     let foreignCurrency = currencyData.foreign;
@@ -23,9 +26,13 @@ export const convertCurrencies = () => {
 
         localStorage.setItem("previousDay", JSON.stringify(priorDay));
 
+        toast.success("Exchange rate updated!", {autoClose: 2000});
+            
     }).catch(err => {
 
         console.log(err);
+        toast.error("Update failed!");
         
-    })
+      }  
+    )
 }

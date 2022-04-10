@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import BudgetFeeHandler from './BudgetFeeHandler';
 import BudgetAdjustedCalculator from './BudgetAdjustedCalculator';
 import BudgetingToolCalculate from './BudgetingToolCalculate';
+import { checkDay, curday } from '../data/HelperFunctions';
 
 const userImport = JSON.parse(localStorage.getItem("user"));
 
@@ -23,6 +24,7 @@ class BudgetingTool extends Component {
         bankFeeMethod: userImport.bankFee,
 
       }
+     checkDay(); 
    }
 
    onUpdateAmount(e) {
